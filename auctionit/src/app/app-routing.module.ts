@@ -1,10 +1,15 @@
-import { AuthindexComponent } from './authindex/authindex.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 
 
 const routes: Routes = [
-  { path: 'authindex', component: AuthindexComponent }
+  { path: '', component: HomeComponent },
+  { path: 'auth/register', component: RegisterComponent },
+  { path: 'auth/login', component: LoginComponent },
+
 ];
 
 @NgModule({
