@@ -12,21 +12,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   constructor(public authService: AuthService, private router: Router) { }
   private authListenerSubs: Subscription;
-  private userEmail = window.sessionStorage.getItem('loggedemail');
-  private status;
+  userEmail: string;
+  status: boolean;
   ngOnInit() {
     this.authListenerSubs = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
       });
     this.status = this.authService.isLoggedIn();
+    this.userEmail = window.sessionStorage.getItem('loggedemail');
   }
 
   onLogout() {
     this.userIsAuthenticated = false;
-    window.sessionStorage.removeItem('token');
-    window.sessionStorage.removeItem('loggedemail');
-    this.router.navigate(['/']);
+    window.sessionStorage.clear();
+    this.status = false;
   }
 
   ngOnDestroy() {

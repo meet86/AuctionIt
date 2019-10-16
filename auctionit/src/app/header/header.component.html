@@ -46,11 +46,13 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
               <a class="nav-link waves-effect waves-light" routerLink="/auth/login"
-                *ngIf="!status && !userIsAuthenticated">Login</a>
+                *ngIf="!status && !userIsAuthenticated">Login </a>
             </li>
-            {{ userEmail }}
             <li class="nav-item">
-              <button class="btn bg-header" type="button" *ngIf="status || userIsAuthenticated"> <span
+              <span *ngIf="status || userIsAuthenticated">{{ userEmail }}</span>
+            </li>
+            <li class="nav-item">
+              <button class="btn btn-outline-danger" type="button" *ngIf="status || userIsAuthenticated"> <span
                   class="text-white" (click)="onLogout()">Logout</span>
               </button>
             </li>
