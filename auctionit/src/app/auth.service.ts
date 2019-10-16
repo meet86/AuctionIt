@@ -4,16 +4,24 @@ import { RegisterModel } from './auth/register/register.model';
 import { Injectable, forwardRef, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
+  private token: string;
+  private authStatusListener = new Subject<boolean>();
   constructor(private http: HttpClient, private router: Router, private notifier: NotifierService) { }
 
+  getToken() {
+    return this.token;
+  }
 
+  getAuthStatusListener() {
+    return this.authStatusListener.asObservable();
+  }
   createUser(fullname: string, email: string, password: string, contact: number, address: string) {
     const regModel: RegisterModel = { fullname, email, password, contact, address };
     this.http.post('http://localhost:3000/api/user/signup', regModel)
@@ -40,10 +48,13 @@ export class AuthService {
     this.http.post('http://localhost:3000/api/user/login', authData)
       .subscribe((response: any) => {
         if (response.status) {
-          this.notifier.notify('info', 'Logging in 5 secs..');
+          const token = response.token;
+          this.token = token;
+          this.authStatusListener.next(true);
+          this.notifier.notify('info', 'Logging in 4 secs..');
           setTimeout(() => {
             this.router.navigate(['/']);
-          });
+          }, 4000);
           console.log(response);
         }
 

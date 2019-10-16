@@ -38,6 +38,7 @@ router.post('/login', (req, res, next) => {
     .then(user => {
       //console.log(user.toJSON());
       if (!user) {
+        console.log("User: " + user);
         return res.status(401).json({
           message: 'Auth Failed, Email Not found.'
         });

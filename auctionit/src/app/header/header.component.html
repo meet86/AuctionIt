@@ -44,7 +44,12 @@
         <div class="md-form my-0">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link waves-effect waves-light" routerLink="/auth/login">Login</a>
+              <a class="nav-link waves-effect waves-light" routerLink="/auth/login"
+                *ngIf="!userIsAuthenticated">Login</a>
+            </li>
+            <li class="nav-item">
+              <button class="btn bg-header" *ngIf="userIsAuthenticated"> <span class="text-white">Logout</span>
+              </button>
             </li>
           </ul>
         </div>

@@ -9,8 +9,9 @@ import { AuthComponent } from './auth/auth.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
+import { AuthInterceptor } from './auth/auth-interceptor';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -70,7 +71,9 @@ const customNotifierOptions: NotifierOptions = {
     HttpClientModule,
     NotifierModule.withConfig(customNotifierOptions),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
