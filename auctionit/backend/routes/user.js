@@ -36,7 +36,7 @@ router.post('/login', (req, res, next) => {
   let fetchedUser;
   User.findOne({ email: req.body.email })
     .then(user => {
-      //console.log(user.toJSON());
+      console.log(user.toJSON());
       if (!user) {
         return res.status(401).json({
           message: 'Auth Failed, Email Not found.'
@@ -46,16 +46,17 @@ router.post('/login', (req, res, next) => {
       return bcrypt.compare(req.body.password, user.password);
     })
     .then(result => {
-      //console.log(result);
+      console.log(result);
       if (!result) {
         return res.status(401).json({ message: 'Incorrect password, Please try again.' });
       }
       const token = jwt.sign({ email: fetchedUser.email, userId: fetchedUser._id },
         'this_is_secret_string_lol_rofl', { expiresIn: '1h' });
-      res.status(200).json({ token: token });
+      res.status(200).json({ token: token, status: true });
     })
     .catch(err => {
       console.log(err);
+      res.status(500).json({ status: false });
     });
 });
 

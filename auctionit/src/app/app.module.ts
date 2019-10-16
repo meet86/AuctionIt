@@ -15,11 +15,11 @@ import { NotifierModule, NotifierOptions } from 'angular-notifier';
 const customNotifierOptions: NotifierOptions = {
   position: {
     horizontal: {
-      position: 'left',
+      position: 'right',
       distance: 12
     },
     vertical: {
-      position: 'bottom',
+      position: 'top',
       distance: 12,
       gap: 10
     }
