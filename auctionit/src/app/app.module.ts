@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -71,7 +72,7 @@ const customNotifierOptions: NotifierOptions = {
     HttpClientModule,
     NotifierModule.withConfig(customNotifierOptions),
   ],
-  providers: [
+  providers: [AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

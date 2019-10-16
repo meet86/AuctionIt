@@ -22,7 +22,8 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link waves-effect waves-light" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link waves-effect waves-light" routerLink="/home">Home <span
+              class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link waves-effect waves-light" href="#">Features</a>
@@ -45,10 +46,12 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
               <a class="nav-link waves-effect waves-light" routerLink="/auth/login"
-                *ngIf="!userIsAuthenticated">Login</a>
+                *ngIf="!status && !userIsAuthenticated">Login</a>
             </li>
+            {{ userEmail }}
             <li class="nav-item">
-              <button class="btn bg-header" *ngIf="userIsAuthenticated"> <span class="text-white">Logout</span>
+              <button class="btn bg-header" type="button" *ngIf="status || userIsAuthenticated"> <span
+                  class="text-white" (click)="onLogout()">Logout</span>
               </button>
             </li>
           </ul>
