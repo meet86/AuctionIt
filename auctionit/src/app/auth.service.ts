@@ -1,3 +1,4 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthModel } from './auth/login/auth.model';
 import { NotifierService } from 'angular-notifier';
 import { RegisterModel } from './auth/register/register.model';
@@ -5,25 +6,38 @@ import { Injectable, forwardRef, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import * as jwt_decode from 'jwt-decode';
+import * as jsonwebtoken from 'jsonwebtoken';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-  private token: string;
+  private token: any;
   private jwtToken: any;
   private authStatusListener = new Subject<boolean>();
+  private userInfoSender = new Subject<string>();
+  obj: any;
   constructor(private http: HttpClient, private router: Router, private notifier: NotifierService) { }
-
+  helper = new JwtHelperService();
   isLoggedIn() {
     return sessionStorage.getItem('token') !== null;
   }
 
 
+
+  getJwtToken() {
+    return this.token;
+  }
+
+
+
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
+  }
+  getUserInfoSender() {
+    return this.userInfoSender.asObservable();
   }
   createUser(fullname: string, email: string, password: string, contact: number, address: string) {
     const regModel: RegisterModel = { fullname, email, password, contact, address };
@@ -51,10 +65,18 @@ export class AuthService {
     this.http.post('http://localhost:3000/api/user/login', authData)
       .subscribe((response: any) => {
         if (response.status) {
-          // const token = response.token;
-          // this.token = token;
+          const token = response.token;
+          this.token = token;
           this.authStatusListener.next(true);
           window.sessionStorage.setItem('token', response.token);
+          // const decoded = jwt_decode(response.token);
+          const decodehashed = this.helper.decodeToken(response.token);
+          // const decoded1 = this.helper.decodeToken(decodehashed);
+          this.obj = JSON.stringify(decodehashed);
+          // this.notifier.notify('info', this.obj);
+          console.log(this.obj);
+          this.userInfoSender.next(this.obj);
+          // this.notifier.notify('error', decoded1);
           window.sessionStorage.setItem('loggedemail', email);
           this.notifier.notify('info', 'Logging in 4 secs..');
           setTimeout(() => {
@@ -70,6 +92,10 @@ export class AuthService {
   }
   getToken() {
     return this.token = sessionStorage.getItem('token');
+  }
+  getUserInfo() {
+    console.log(this.obj);
+    return this.obj;
   }
 
 }
