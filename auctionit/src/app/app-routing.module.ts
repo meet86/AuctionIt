@@ -1,3 +1,4 @@
+import { PostAuctionComponent } from './post-auction/post-auction.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth.guard';
@@ -9,6 +10,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
+  { path: 'actions/upload', component: PostAuctionComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'auth/register', component: RegisterComponent },
   { path: 'auth/login', component: LoginComponent },
