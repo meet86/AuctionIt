@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { HomeComponent } from './home/home.component';
 import { AuthComponent } from './auth/auth.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -13,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
 
 const customNotifierOptions: NotifierOptions = {
   position: {
@@ -60,10 +61,11 @@ const customNotifierOptions: NotifierOptions = {
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent,
     AuthComponent,
     RegisterComponent,
     LoginComponent,
+    HomeComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
