@@ -2,3 +2,4 @@
 @import '~angular-notifier/styles/core.css';
 @import '~angular-notifier/styles/types/type-error.css';
 @import '~angular-notifier/styles/themes/theme-material.css';
+@import '../node_modules/ngx-toastr/toastr.css';

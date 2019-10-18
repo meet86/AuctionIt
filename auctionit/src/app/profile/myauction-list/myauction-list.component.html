@@ -1,0 +1,32 @@
+<div class="main-overlay">
+  <div class="card" *ngFor="let post of temp">
+    <div class=" card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+          aria-controls="collapseTwo">
+          {{post.productName}}
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
+      <div class="card-body">
+        <form (submit)="onSubmit(postData, post._id)" #postData="ngForm">
+          Initial Bid :<input type="number" ngModel #bidInput="ngModel" name="initialBid" class="form-control" min="1"
+            required />Old Value: {{post.initialBid }}
+          <br>
+          Product Type :<input type="text" ngModel #productType="ngModel" name="productType" class="form-control"
+            required /> Old
+          Value: {{post.productType }}<br>
+          Description :<textarea class="form-control" ngModel #descInput="ngModel" name="desc" rows="5" cols="15"
+            required></textarea> Old Value: {{ post. desc }}<br>
+          <button type="submit" class="btn btn-outline-primary">Edit</button> &nbsp;
+          &nbsp;
+          <button type="button" class="btn btn-outline-danger" (click)="onAuctionDelete(post._id)">Delete</button>
+          <small id="emailHelp" *ngIf="err !== '' || err1 !== ''" class="form-text text-danger">{{ err }} {{ err1 }}
+          </small>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

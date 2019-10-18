@@ -27,11 +27,11 @@ export class RegisterComponent implements OnInit {
     // if (fullname == null || address == null || contact == null || email == null || password == null) {
     //   this.required = true;
     // }
-    if (form.invalid) {
-      this.err = 'All Fields are required.!';
-      this.notifier.notify('error', 'All Fields are required');
-      return;
-    }
+    // if (form.invalid) {
+    //   this.err = 'All Fields are required.!';
+    //   this.notifier.notify('error', 'All Fields are required');
+    //   return;
+    // }
     if (password !== cpassword) {
       this.notifier.notify('error', 'Password Didn\'t matched..!', 'Error:PASSWDNTMATCHED');
       return;

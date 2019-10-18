@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { mimeType } from './mime-validator';
 import { NotifierService } from 'angular-notifier';
 import { Component, OnInit } from '@angular/core';
@@ -13,24 +14,13 @@ export class PostAuctionComponent implements OnInit {
   form: FormGroup;
   imagePreview: any;
   errmsg: string;
-  constructor(public notifer: NotifierService, public postauctionService: PostauctionService) { }
+  param1: string;
+  constructor(public notifer: NotifierService, public postauctionService: PostauctionService, public route: ActivatedRoute) { }
 
   ngOnInit() {
     this.form = new FormGroup({
-      first: new FormControl(null, {
-        validators: [Validators.required], updateOn: 'blur'
-      }),
-      last: new FormControl(null, {
-        validators: [Validators.required], updateOn: 'blur'
-      }),
       initialBid: new FormControl(null, {
         validators: [Validators.required, Validators.min(1)], updateOn: 'blur'
-      }),
-      phone: new FormControl(null, {
-        validators: [Validators.required, Validators.maxLength(10)], updateOn: 'blur'
-      }),
-      email: new FormControl(null, {
-        validators: [Validators.required, Validators.email], updateOn: 'blur'
       }),
       productType: new FormControl(null, {
         validators: [Validators.required], updateOn: 'blur'
@@ -46,24 +36,22 @@ export class PostAuctionComponent implements OnInit {
   }
 
   onPostAuction() {
-    const first = this.form.value.first;
-    const last = this.form.value.last;
+
     const initialBid = this.form.value.initialBid;
-    const phone = this.form.value.phone;
-    const email = this.form.value.email;
+
     const productType = this.form.value.productType;
     const desc = this.form.value.desc;
     const productName = this.form.value.productName;
-
+    const param = this.route.snapshot.queryParamMap.get('id');
     if (this.form.invalid) {
       this.notifer.notify('error', 'Entered form data isn\'t valid, Please Try again.');
       // this.form.reset();
       this.errmsg = 'Entered form data isn\'t valid, Please Try again.';
       return;
     }
-    this.postauctionService.addAuction(first, last, initialBid, phone, email, productType, desc, productName, this.form.value.image);
+    this.postauctionService.addAuction(initialBid, productType, desc, productName, this.form.value.image, param);
 
-    console.log(productName + ', ' + first + ',' + last + ',' + initialBid + ',' + phone + ',' + email + ',' + productType + ',' + desc);
+    console.log(productName + ', ' + + ',' + + ',' + initialBid + ',' + + ',' + + ',' + productType + ',' + desc);
   }
 
   onImagePicked(event: Event) {

@@ -1,9 +1,9 @@
 export interface PostAuctionModel {
-  firstname: string;
-  lastname: string;
+  _creator: string;
   initialBid: number;
-  phone: number;
-  email: string;
+
   productType: string;
   desc: string;
+  productName: string;
+  imagePath: string;
 }

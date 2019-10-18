@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');
+const { User } = require('../models/user');
 router.post('/signup', (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
@@ -23,6 +23,7 @@ router.post('/signup', (req, res, next) => {
 
         })
         .catch(err => {
+          console.warn(err);
           res.status(500).json({
             error: err,
             isSucceed: false
@@ -34,7 +35,7 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
   let fetchedUser;
-  User.findOne({ email: req.body.email })
+  User.findOne({ email: req.body.email }).exec()
     .then(user => {
       //console.log(user.toJSON());
       if (!user) {

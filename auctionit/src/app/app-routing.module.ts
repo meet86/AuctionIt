@@ -1,3 +1,5 @@
+import { MyauctionListComponent } from './profile/myauction-list/myauction-list.component';
+import { ProfileComponent } from './profile/profile.component';
 import { PostAuctionComponent } from './post-auction/post-auction.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
@@ -14,7 +16,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'auth/register', component: RegisterComponent },
   { path: 'auth/login', component: LoginComponent },
-  { path: 'about', component: AboutComponent }
+  { path: 'about', component: AboutComponent },
+  { path: 'profile/show-list', component: MyauctionListComponent },
 
 ];
 

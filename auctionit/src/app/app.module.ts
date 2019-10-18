@@ -15,6 +15,10 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { PostAuctionComponent } from './post-auction/post-auction.component';
+import { ProfileComponent } from './profile/profile.component';
+import { MyauctionListComponent } from './profile/myauction-list/myauction-list.component';
+import { ToastrModule } from 'ngx-toastr';
+
 const customNotifierOptions: NotifierOptions = {
   position: {
     horizontal: {
@@ -67,6 +71,8 @@ const customNotifierOptions: NotifierOptions = {
     HomeComponent,
     AboutComponent,
     PostAuctionComponent,
+    ProfileComponent,
+    MyauctionListComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +81,7 @@ const customNotifierOptions: NotifierOptions = {
     ReactiveFormsModule,
     HttpClientModule,
     NotifierModule.withConfig(customNotifierOptions),
+    ToastrModule.forRoot(),
 
   ],
   providers: [AuthGuard,
