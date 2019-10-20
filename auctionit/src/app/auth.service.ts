@@ -75,6 +75,8 @@ export class AuthService {
           this.obj = JSON.stringify(decodehashed);
           // this.notifier.notify('info', this.obj);
           console.log(this.obj);
+          const parsed = JSON.parse(this.obj);
+          console.log('_ID: ' + parsed._id);
           this.userInfoSender.next(this.obj);
           // this.notifier.notify('error', decoded1);
           window.sessionStorage.setItem('loggedemail', email);

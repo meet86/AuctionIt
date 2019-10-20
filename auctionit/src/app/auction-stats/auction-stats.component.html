@@ -1,0 +1,39 @@
+<div class="main-overlay">
+  <!-- {{ postAuctionData | json }} -->
+  <!-- {{ postAuctionData[0].extra | json }} -->
+  <!-- {{ postAuctionData.extra | json }} -->
+  {{ maxData | json }}
+  <h3 style="padding-left: 450px">Your posted auctions will be displayed here ...</h3>
+  <div class="card" *ngFor="let post of postAuctionData; let i = index">
+    <div class=" card-header " id="headingTwo">
+      <h5 class="mb-0">
+        <!-- {{ post.extra.bids | json }} -->
+        <!-- {{post.extra._by | json}} -->
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+          aria-controls="collapseTwo">
+          {{post.productData.productName}} (ID:{{post.productData._id}} )
+
+        </button>
+      </h5>
+    </div>
+    Currently Placed bids, Click on product see them.
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+      *ngFor="let b of post.extra | sortBy:'asc':'bid'">
+
+      <div class="card-body">
+        {{ b._by }} => {{ b.bid  }}<br>
+
+      </div>
+    </div>
+    <!-- {{ post.extra._by }} -->
+    <button type="button" class="btn btn-outline-danger col-sm-2" (click)="onEndAuction(post.productData._id)">End
+      Auction</button>
+    <small id="emailHelp" class="form-text text-danger">This action is not reversable, do it at your own risk!
+    </small>
+    <button type="button" class="btn btn-outline-info col-sm-2" (click)="onFindMax(post.productData._id)">Find Max
+      Bid
+    </button><span class="text-success"> {{ maxData[0]._by }} => {{ maxData[0].bid }} </span>
+
+  </div>
+
+</div>

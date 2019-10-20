@@ -39,14 +39,25 @@
           <!--  col-md-6   -->
 
           <div class="col-md-6">
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="productType">Product Type<small> (i.e Smartphone, Camera etc..)</small></label>
               <input type="text" class="form-control" id="productType" formControlName="productType" />
               <small id="emailHelp" *ngIf="form.get('productType').invalid && form.get('productType').dirty"
                 class="form-text text-danger">Please
-                Enter Product Type </small>
+                Enter Product Type </small> -->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Category</label>
+              </div>
+              <select formControlName="productType" name="productType" class="custom-select" id="inputGroupSelect01">
 
+                <option value="smartphone">Smartphone</option>
+                <option value="camera">Camera</option>
+                <option value="tv">TV</option>
+              </select>
             </div>
+
+            <!-- </div> -->
 
           </div>
           <!--  col-md-6   -->
@@ -84,6 +95,13 @@
               <small id="emailHelp" *ngIf="form.get('productName').invalid && form.get('productName').dirty"
                 class="form-text text-danger">Please
                 Enter Product Name </small>
+            </div>
+            <div class="form-group">
+
+              <small id="emailHelp" class="form-text text-danger">This auction will be expired automatically after 2
+                days after adding it. Read Policies to
+                know more!
+              </small>
             </div>
           </div>
         </div>

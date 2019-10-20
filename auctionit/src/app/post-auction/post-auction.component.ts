@@ -15,6 +15,7 @@ export class PostAuctionComponent implements OnInit {
   imagePreview: any;
   errmsg: string;
   param1: string;
+  currentUser: string;
   constructor(public notifer: NotifierService, public postauctionService: PostauctionService, public route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -31,8 +32,9 @@ export class PostAuctionComponent implements OnInit {
       desc: new FormControl(null, {
         validators: [Validators.required], updateOn: 'blur'
       }),
-      image: new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] })
+      image: new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
     });
+    this.currentUser = sessionStorage.getItem('loggedemail');
   }
 
   onPostAuction() {
@@ -49,7 +51,8 @@ export class PostAuctionComponent implements OnInit {
       this.errmsg = 'Entered form data isn\'t valid, Please Try again.';
       return;
     }
-    this.postauctionService.addAuction(initialBid, productType, desc, productName, this.form.value.image, param);
+    this.postauctionService.addAuction(initialBid, productType, desc, productName,
+      this.form.value.image, param, this.currentUser);
 
     console.log(productName + ', ' + + ',' + + ',' + initialBid + ',' + + ',' + + ',' + productType + ',' + desc);
   }

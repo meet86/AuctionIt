@@ -18,7 +18,10 @@ import { PostAuctionComponent } from './post-auction/post-auction.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MyauctionListComponent } from './profile/myauction-list/myauction-list.component';
 import { ToastrModule } from 'ngx-toastr';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { AuctionStatsComponent } from './auction-stats/auction-stats.component';
+import { SortPipePipe } from './sort-pipe.pipe';
 const customNotifierOptions: NotifierOptions = {
   position: {
     horizontal: {
@@ -73,11 +76,15 @@ const customNotifierOptions: NotifierOptions = {
     PostAuctionComponent,
     ProfileComponent,
     MyauctionListComponent,
+    ProductDetailComponent,
+    AuctionStatsComponent,
+    SortPipePipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
     NotifierModule.withConfig(customNotifierOptions),

@@ -53,14 +53,14 @@
           </div>
 
           <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown_1" role="button" aria-haspopup="true"
-              aria-expanded="false">
+            <a class="nav-link dropdown-toggle" *ngIf="status || userIsAuthenticated" id="navbarDropdown_1"
+              role="button" aria-haspopup="true" aria-expanded="false">
               Profile
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
               <a class="dropdown-item" (click)="onShowList()">Show My
                 Auctions</a>
-              <a class="dropdown-item">product details</a>
+              <a class="dropdown-item" (click)="onShowStats()">Auction Stats</a>
 
             </div>
           </div>

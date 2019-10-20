@@ -1,3 +1,4 @@
+import { AuctionStatsComponent } from './auction-stats/auction-stats.component';
 import { MyauctionListComponent } from './profile/myauction-list/myauction-list.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PostAuctionComponent } from './post-auction/post-auction.component';
@@ -8,6 +9,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
 const routes: Routes = [
@@ -17,7 +19,9 @@ const routes: Routes = [
   { path: 'auth/register', component: RegisterComponent },
   { path: 'auth/login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'profile/show-list', component: MyauctionListComponent },
+  { path: 'profile/show-list', component: MyauctionListComponent, canActivate: [AuthGuard] },
+  { path: 'product/product-detail', component: ProductDetailComponent, canActivate: [AuthGuard] },
+  { path: 'profile/show-stats', component: AuctionStatsComponent, canActivate: [AuthGuard] }
 
 ];
 

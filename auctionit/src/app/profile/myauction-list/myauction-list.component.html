@@ -1,7 +1,9 @@
 <div class="main-overlay">
+  <h3 style="padding-left: 450px">Your posted auctions will be displayed here ...</h3>
   <div class="card" *ngFor="let post of temp">
-    <div class=" card-header" id="headingTwo">
+    <div class=" card-header " id="headingTwo">
       <h5 class="mb-0">
+
         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
           aria-controls="collapseTwo">
           {{post.productName}}
@@ -12,6 +14,7 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
       <div class="card-body">
         <form (submit)="onSubmit(postData, post._id)" #postData="ngForm">
+          Due Date: {{ post.dueDate | date }}<br>
           Initial Bid :<input type="number" ngModel #bidInput="ngModel" name="initialBid" class="form-control" min="1"
             required />Old Value: {{post.initialBid }}
           <br>
@@ -20,6 +23,7 @@
           Value: {{post.productType }}<br>
           Description :<textarea class="form-control" ngModel #descInput="ngModel" name="desc" rows="5" cols="15"
             required></textarea> Old Value: {{ post. desc }}<br>
+          <img [src]="post.imagePath" height="400" width="800"><br><br>
           <button type="submit" class="btn btn-outline-primary">Edit</button> &nbsp;
           &nbsp;
           <button type="button" class="btn btn-outline-danger" (click)="onAuctionDelete(post._id)">Delete</button>

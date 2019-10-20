@@ -6,4 +6,5 @@ export interface PostAuctionModel {
   desc: string;
   productName: string;
   imagePath: string;
+  dueDate: Date;
 }

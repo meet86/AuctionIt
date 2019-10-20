@@ -1,3 +1,4 @@
+import { ToastrModule } from 'ngx-toastr';
 import { NotifierService } from 'angular-notifier';
 import { PostAuctionModel } from './../../post-auction/post-auction.model';
 import { Subscription } from 'rxjs';
@@ -16,7 +17,7 @@ export class MyauctionListComponent implements OnInit {
   param1: string;
   postAuctionData: any;
   public temp: any = [];
-  constructor(private postAuctionService: PostauctionService, private route: ActivatedRoute, private notifier: NotifierService) { }
+  constructor(private postAuctionService: PostauctionService, private route: ActivatedRoute, public toastrr: ToastrModule) { }
   err: string;
   err1: string;
 
@@ -25,6 +26,7 @@ export class MyauctionListComponent implements OnInit {
       .subscribe((responsedData) => {
         this.postAuctionData = responsedData;
         console.log(this.postAuctionData);
+        // tslint:disable-next-line: prefer-for-of
         for (let index = 0; index < this.postAuctionData.length; index++) {
           this.temp.push(this.postAuctionData[index]);
 
@@ -43,7 +45,6 @@ export class MyauctionListComponent implements OnInit {
       this.err1 = 'Bid can\'t be 0';
     }
     if (form.invalid) {
-      this.notifier.notify('error', 'Entered form data is invalid');
       this.err = 'Entered form data is invalid';
       console.log('invalid');
     }
@@ -51,7 +52,7 @@ export class MyauctionListComponent implements OnInit {
   }
 
   onAuctionDelete(id: string) {
-    console.log('DeleteID: ' + id);
+    this.postAuctionService.OnDeleteAuction(id);
   }
 
 }
