@@ -1,0 +1,83 @@
+<div class="main-overlay">
+
+  <!-- {{ responsedData | json}} -->
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-5">Messages</h1>
+      <!-- <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> -->
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+
+        <th scope="col">From</th>
+        <th scope="col">Message</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of responsedData">
+        <td *ngIf="data.msgType===''">{{ data.from }}</td>
+        <td *ngIf="data.msgType===''">{{data.msg}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br><br><br>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-5">Payments</h1>
+    <!-- <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> -->
+  </div>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+
+      <th scope="col">From</th>
+      <th scope="col">Message</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of responsedData">
+      <td *ngIf="data.msgType==='Pay Now'">{{ data.from }}</td>
+      <td *ngIf="data.msgType==='Pay Now'">{{data.msg}}</td>
+      <td *ngIf="data.msgType==='Pay Now'"><button class="btn btn-primary" type="button"
+          (click)="onPayNow(data.from,data.product,data.to,data.amount)">{{ data.msgType }}</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br><br><br>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-5">Pending Deliveries</h1>
+    <!-- <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> -->
+  </div>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+
+      <th scope="col">From</th>
+      <th scope="col">Message</th>
+      <th scope="col">Address</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of responsedData">
+      <td *ngIf="data.msgType==='Deliver Now'">{{ data.from }}</td>
+      <td *ngIf="data.msgType==='Deliver Now'">{{data.msg}}</td>
+      <td *ngIf="data.msgType==='Deliver Now'">{{ data.deladdr  }}</td>
+      <td *ngIf="data.msgType==='Deliver Now'"><button class="btn btn-primary"
+          (click)="onDelivery(data.product, data.from, data.to)" type="button">{{ data.msgType }}</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
